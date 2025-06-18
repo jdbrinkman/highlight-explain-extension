@@ -18,8 +18,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           return; // Stop execution
         }
   
-        // Use your actual deployed Vercel URL with the correct API path
-        const apiUrl = "https://highlight-explain-extension.vercel.app/api/explain";
+        // ** THIS IS THE CORRECTED LINE **
+        // Use the Vercel domain that matches your chosen project
+        const apiUrl = "https://highlight-explain-extension-bkvt.vercel.app/api/explain";
   
         fetch(apiUrl, {
           method: "POST",
