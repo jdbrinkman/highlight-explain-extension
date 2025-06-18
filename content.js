@@ -34,8 +34,15 @@ document.addEventListener("selectionchange", () => {
       explainBtn.style.cursor = "pointer";
       document.body.appendChild(explainBtn);
 
+      // This is the event listener that contains the fix.
       explainBtn.addEventListener("click", () => {
-        chrome.runtime.sendMessage({ action: "explain", text: selectedText });
+        // ** THE FIX IS HERE **
+        // Instead of using the old 'selectedText' variable, we get the
+        // current selection at the exact moment the button is clicked.
+        const currentSelection = window.getSelection().toString().trim();
+        if (currentSelection) {
+            chrome.runtime.sendMessage({ action: "explain", text: currentSelection });
+        }
       });
     }
 
