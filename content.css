@@ -1,0 +1,46 @@
+/* content.css */
+
+.explanation-tooltip {
+    position: absolute;
+    z-index: 2147483647; /* Max z-index to appear on top of everything */
+    width: 300px;
+    padding: 15px;
+    padding-top: 30px; /* Extra padding for the close button */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: sans-serif;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+}
+
+.explanation-tooltip-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Light Theme */
+.explanation-tooltip.theme-light {
+    background-color: #ffffff;
+    color: #222222;
+}
+.explanation-tooltip.theme-light .explanation-tooltip-close-btn {
+    color: #555555;
+}
+
+/* Dark Theme */
+.explanation-tooltip.theme-dark {
+    background-color: #2a2a2e;
+    color: #f1f1f1;
+    border-color: #555;
+}
+.explanation-tooltip.theme-dark .explanation-tooltip-close-btn {
+    color: #f1f1f1;
+}

@@ -1,52 +1,95 @@
+// content.js
+
 let explainBtn = null;
+let tooltip = null;
+let selectionRect = null;
+
+// Function to remove any existing tooltip
+function removeTooltip() {
+  if (tooltip && tooltip.parentNode) {
+    tooltip.parentNode.removeChild(tooltip);
+    tooltip = null;
+  }
+}
 
 document.addEventListener("selectionchange", () => {
-  const selectedText = window.getSelection().toString().trim();
+  // Always remove the tooltip when the selection changes
+  removeTooltip();
+  
+  const selection = window.getSelection();
+  const selectedText = selection.toString().trim();
 
   if (selectedText.length > 10) {
     if (!explainBtn) {
       explainBtn = document.createElement("button");
       explainBtn.innerText = "Explain";
-      explainBtn.setAttribute("aria-label", "Explain selected text");
+      // Basic styling for the button
       explainBtn.style.position = "absolute";
-      explainBtn.style.zIndex = 9999;
-      explainBtn.style.backgroundColor = "#000";
-      explainBtn.style.color = "#fff";
-      explainBtn.style.fontSize = "18px";
-      explainBtn.style.borderRadius = "24px";
+      explainBtn.style.zIndex = "2147483646";
+      explainBtn.style.background = "#007bff";
+      explainBtn.style.color = "white";
+      explainBtn.style.border = "none";
+      explainBtn.style.padding = "5px 10px";
+      explainBtn.style.borderRadius = "5px";
+      explainBtn.style.cursor = "pointer";
       document.body.appendChild(explainBtn);
 
-      explainBtn.addEventListener("click", async () => {
-        const text = window.getSelection().toString();
-        chrome.runtime.sendMessage({ action: "explain", text });
+      explainBtn.addEventListener("click", () => {
+        chrome.runtime.sendMessage({ action: "explain", text: selectedText });
       });
     }
 
-    const range = window.getSelection().getRangeAt(0);
-    const rect = range.getBoundingClientRect();
-    explainBtn.style.top = `${window.scrollY + rect.top - 40}px`;
-    explainBtn.style.left = `${rect.left}px`;
+    const range = selection.getRangeAt(0);
+    selectionRect = range.getBoundingClientRect();
     explainBtn.style.display = "block";
+    explainBtn.style.top = `${window.scrollY + selectionRect.bottom + 5}px`;
+    explainBtn.style.left = `${window.scrollX + selectionRect.left}px`;
   } else if (explainBtn) {
     explainBtn.style.display = "none";
   }
 });
+
 chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.action === "showTooltip") {
-      const tooltip = document.createElement("div");
-      tooltip.innerText = msg.summary;
-      tooltip.setAttribute("role", "dialog");
-      tooltip.style.position = "absolute";
-      tooltip.style.top = `${explainBtn.offsetTop + 50}px`;
-      tooltip.style.left = `${explainBtn.offsetLeft}px`;
-      tooltip.style.maxWidth = "400px";
-      tooltip.style.background = "#fff";
-      tooltip.style.color = "#000";
-      tooltip.style.padding = "16px";
-      tooltip.style.borderRadius = "8px";
-      tooltip.style.fontSize = "16px";
-      tooltip.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-      document.body.appendChild(tooltip);
+  if (msg.action === "showTooltip") {
+    removeTooltip(); // Remove old tooltip before showing a new one
+
+    tooltip = document.createElement("div");
+    tooltip.innerText = msg.summary;
+    
+    // Add classes for styling from content.css
+    tooltip.classList.add("explanation-tooltip");
+
+    // Get settings from storage and apply them
+    chrome.storage.sync.get(["fontSize", "contrast"], (data) => {
+        // Apply font size
+        const fontSize = data.fontSize || "medium";
+        tooltip.style.fontSize = fontSize;
+
+        // Apply contrast theme
+        const contrast = data.contrast || "light";
+        tooltip.classList.add(`theme-${contrast}`);
+    });
+
+    // Position the tooltip below the selection
+    if (selectionRect) {
+        tooltip.style.top = `${window.scrollY + selectionRect.bottom + 40}px`; // Below button
+        tooltip.style.left = `${window.scrollX + selectionRect.left}px`;
     }
-  });
-  
+
+    // Add a close button
+    const closeBtn = document.createElement("button");
+    closeBtn.innerHTML = "&times;"; // "X" symbol
+    closeBtn.classList.add("explanation-tooltip-close-btn");
+    closeBtn.onclick = removeTooltip; // Close button removes tooltip
+    tooltip.appendChild(closeBtn);
+
+    document.body.appendChild(tooltip);
+  }
+});
+
+// Close tooltip if the user clicks anywhere else on the page
+document.addEventListener('click', (event) => {
+    if (tooltip && !tooltip.contains(event.target) && event.target !== explainBtn) {
+        removeTooltip();
+    }
+});

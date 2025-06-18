@@ -2,10 +2,9 @@
     "manifest_version": 3,
     "name": "Highlight & Explain",
     "version": "1.0",
-    "description": "Helps seniors understand web text using AI summaries.",
+    "description": "Select text on any webpage to get a simple explanation, powered by AI.",
     "action": {
-      "default_popup": "popup.html",
-      "default_icon": "icons/icon128.png"
+      "default_popup": "popup.html"
     },
     "background": {
       "service_worker": "background.js"
@@ -20,12 +19,15 @@
     ],
     "content_scripts": [
       {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "matches": [
+          "<all_urls>"
+        ],
+        "js": [
+          "content.js"
+        ],
+        "css": [
+          "content.css"
+        ]
       }
-    ],
-    "icons": {
-      "128": "icons/icon128.png"
-    }
+    ]
   }
-  
