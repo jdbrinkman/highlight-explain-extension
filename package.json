@@ -1,0 +1,8 @@
+{
+    "name": "highlight-explain-extension",
+    "version": "1.0.0",
+    "description": "Server-side functions for the Highlight & Explain extension.",
+    "dependencies": {
+      "openai": "^4.52.7"
+    }
+  }
