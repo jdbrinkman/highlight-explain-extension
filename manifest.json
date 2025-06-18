@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "Highlight & Explain",
+    "version": "1.0",
+    "description": "Helps seniors understand web text using AI summaries.",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icons/icon128.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": [
+      "activeTab",
+      "storage",
+      "scripting"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "icons": {
+      "128": "icons/icon128.png"
+    }
+  }
+  
