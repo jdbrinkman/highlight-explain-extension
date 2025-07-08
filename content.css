@@ -1,143 +1,744 @@
-/* Basic tooltip styling */
+/* Enhanced tooltip styling for seniors */
 .highlight-explain-tooltip {
     position: absolute;
     background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 999999; /* Ensure it's on top */
-    min-width: 200px;
-    /* NEW: Responsive width properties */
-    width: 90%; /* Take up 90% of the available width */
-    max-width: 400px; /* But don't exceed 400px, or the original 300px if you prefer */
-    left: 5%; /* Center it roughly by giving left/right margin */
-    right: 5%; /* For a more controlled horizontal position */
-    /* Adjust positioning from absolute left/top which might override this */
-    /* Removed specific left and top for better responsiveness, will rely more on JS */
+    border: 2px solid #333; /* Thicker, more visible border */
+    padding: 16px; /* Larger padding for easier reading */
+    border-radius: 8px; /* Slightly larger radius */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow for better visibility */
+    z-index: 999999;
+    min-width: 250px; /* Larger minimum width */
+    width: 90%;
+    max-width: 450px; /* Larger max width for more text */
+    left: 5%;
+    right: 5%;
 
-    font-family: Arial, sans-serif;
-    color: #333;
-    line-height: 1.5;
+    /* Senior-friendly typography */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Clear, readable font */
+    font-size: 16px; /* Larger base font size */
+    line-height: 1.6; /* More generous line spacing */
+    color: #222; /* Darker text for better contrast */
     text-align: left;
-    /* Hidden by default, now with transitions */
+    
+    /* Smooth animations */
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
-/* Make tooltip visible when display is block and apply initial transform */
+/* Make tooltip visible with enhanced animation */
 .highlight-explain-tooltip[style*="display: block"] {
     opacity: 1;
     transform: translateY(0);
 }
 
-
-/* Tooltip close button styling */
+/* Enhanced close button - larger and more accessible */
 .tooltip-close-button {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background: none;
-    border: none;
-    font-size: 1.2em;
+    top: 8px;
+    right: 8px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 28px; /* Larger clickable area */
+    height: 28px;
+    font-size: 16px; /* Larger X */
     cursor: pointer;
-    color: #888;
+    color: #666;
     line-height: 1;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .tooltip-close-button:hover {
+    background: #e0e0e0;
     color: #333;
+    border-color: #999;
 }
 
-/* Light Contrast Theme */
+/* Light Contrast Theme - Enhanced */
 .highlight-explain-tooltip.light-contrast {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    color: #333;
+    background-color: #ffffff;
+    border: 2px solid #333;
+    color: #222;
 }
 
-/* Dark Contrast Theme */
+.highlight-explain-tooltip.light-contrast .tooltip-close-button {
+    background: #f5f5f5;
+    border-color: #ccc;
+    color: #666;
+}
+
+/* Dark Contrast Theme - High contrast for better visibility */
 .highlight-explain-tooltip.dark-contrast {
-    background-color: #333;
-    border: 1px solid #555;
-    color: #eee;
+    background-color: #1a1a1a;
+    border: 2px solid #fff;
+    color: #ffffff;
 }
 
-/* Styling for the Explain button */
+.highlight-explain-tooltip.dark-contrast .tooltip-close-button {
+    background: #333;
+    border-color: #666;
+    color: #fff;
+}
+
+.highlight-explain-tooltip.dark-contrast .tooltip-close-button:hover {
+    background: #444;
+    border-color: #888;
+}
+
+/* Enhanced Explain button - much more visible and accessible */
 #explainHighlightBtn {
     position: absolute;
-    z-index: 999998; /* Just below the tooltip */
-    background-color: #007bff;
+    z-index: 999998;
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient for visual appeal */
     color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    border: 2px solid #0056b3;
+    padding: 12px 20px; /* Larger padding for easier clicking */
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* Transitions for button */
+    font-size: 16px; /* Larger font */
+    font-weight: 600; /* Bold text */
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    min-width: 100px; /* Minimum width for consistency */
+    text-align: center;
+    
+    /* Gentle fade-in animation - much less jarring */
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    transition: opacity 0.15s ease-out;
 }
 
-/* Make button visible when display is block and apply initial transform */
+/* Enhanced button visibility - simple fade in */
 #explainHighlightBtn[style*="display: block"] {
     opacity: 1;
-    transform: translateY(0);
 }
-
 
 #explainHighlightBtn:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #0056b3, #004085);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
 }
 
-/* New class for explain button styles, mirroring the #explainHighlightBtn */
-.explain-button {
-    background-color: #007bff;
+#explainHighlightBtn:active {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* New Verify button styling */
+#verifyHighlightBtn {
+    position: absolute;
+    z-index: 999998;
+    background: linear-gradient(135deg, #28a745, #20c997);
     color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    border: 2px solid #20c997;
+    padding: 12px 20px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* Transitions for button class */
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out, background-color 0.2s ease-out;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    min-width: 100px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+}
+
+#verifyHighlightBtn[style*="display: block"] {
+    opacity: 1;
+}
+
+#verifyHighlightBtn:hover {
+    background: linear-gradient(135deg, #218838, #1e9a6a);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+}
+
+/* Enhanced explain button class */
+.explain-button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: 2px solid #0056b3;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    min-width: 100px;
+    text-align: center;
+    transition: all 0.15s ease-out;
 }
 
 .explain-button:hover {
-    background-color: #0056b3;
+    background: linear-gradient(135deg, #0056b3, #004085);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
 }
 
-/* Styling for the disabled explain button */
+/* Verify button class */
+.verify-button {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: 2px solid #20c997;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    min-width: 100px;
+    text-align: center;
+    transition: all 0.15s ease-out;
+}
+
+.verify-button:hover {
+    background: linear-gradient(135deg, #218838, #1e9a6a);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+}
+
+/* Enhanced disabled state - more obvious */
+.explain-button.disabled,
+.verify-button.disabled {
+    background: #cccccc;
+    border-color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+.explain-button.disabled:hover,
+.verify-button.disabled:hover {
+    background: #cccccc;
+    box-shadow: none;
+}2px solid #0056b3;
+    padding: 12px 20px; /* Larger padding for easier clicking */
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px; /* Larger font */
+    font-weight: 600; /* Bold text */
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    min-width: 100px; /* Minimum width for consistency */
+    text-align: center;
+    
+    /* Gentle fade-in animation - much less jarring */
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+}
+
+/* Enhanced button visibility - simple fade in */
+#explainHighlightBtn[style*="display: block"] {
+    opacity: 1;
+}
+
+#explainHighlightBtn:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+#explainHighlightBtn:active {
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Enhanced explain button class */
+.explain-button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: 2px solid #0056b3;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    min-width: 100px;
+    text-align: center;
+    transition: all 0.15s ease-out;
+}
+
+.explain-button:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+/* Enhanced disabled state - more obvious */
 .explain-button.disabled {
-    background-color: #cccccc; /* Grey out the background */
-    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
-    opacity: 0.7; /* Make it slightly transparent */
-    box-shadow: none; /* Remove shadow to make it look less interactive */
+    background: #cccccc;
+    border-color: #999;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
 }
 
 .explain-button.disabled:hover {
-    background-color: #cccccc; /* Keep the grey background on hover */
+    background: #cccccc;
+    box-shadow: none;
 }
 
-/* Basic loading spinner for the tooltip */
+/* Enhanced loading spinner - larger and more visible */
 .loading-spinner {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Larger spinner */
+    height: 24px;
     animation: spin 1s linear infinite;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Font size variations for accessibility */
+.highlight-explain-tooltip.font-small {
+    font-size: 14px;
+}
+
+.highlight-explain-tooltip.font-medium {
+    font-size: 16px;
+}
+
+.highlight-explain-tooltip.font-large {
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.highlight-explain-tooltip.font-x-large {
+    font-size: 22px;
+    line-height: 1.8;
+    padding: 20px;
+}
+
+.highlight-explain-tooltip.font-xx-large {
+    font-size: 26px;
+    line-height: 1.9;
+    padding: 24px;
+}
+
+/* High contrast mode enhancements */
+.highlight-explain-tooltip.high-contrast {
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+}
+
+.highlight-explain-tooltip.high-contrast .tooltip-close-button {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    font-weight: bold;
+}
+
+/* Focus indicators for keyboard navigation */
+.tooltip-close-button:focus,
+.explain-button:focus,
+#explainHighlightBtn:focus {
+    outline: 3px solid #ffd700; /* Bright yellow outline */
+    outline-offset: 2px;
+}
+
+/* Tooltip content styling */
+.tooltip-content {
+    display: block;
+    word-wrap: break-word;
+    hyphens: auto;
+    margin-top: 10px;
+}
+
+/* New: Tooltip header for verification alerts */
+.tooltip-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 6px 6px 0 0;
+    margin: -16px -16px 0 -16px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.tooltip-header .alert-icon {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.tooltip-header .alert-title {
+    flex: 1;
+}
+
+.tooltip-header .tooltip-close-button {
+    position: static;
+    margin: 0 0 0 10px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Alert type styling */
+.alert-info {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #ffc107, #fd7e14);
+    color: #212529;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+}
+
+/* Verification result tooltip styling */
+.verification-result {
+    border-left: 5px solid #28a745;
+}
+
+.verification-result.warning {
+    border-left-color: #ffc107;
+}
+
+.verification-result.danger {
+    border-left-color: #dc3545;
+}
+
+/* Scam alert specific styling */
+.highlight-explain-tooltip.danger {
+    border-color: #dc3545;
+    box-shadow: 0 4px 20px rgba(220, 53, 69, 0.3);
+    animation: pulseRed 2s ease-in-out;
+}
+
+.highlight-explain-tooltip.warning {
+    border-color: #ffc107;
+    box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+}
+
+.highlight-explain-tooltip.success {
+    border-color: #28a745;
+    box-shadow: 0 4px 20px rgba(40, 167, 69, 0.3);
+}
+
+/* Pulse animation for danger alerts */
+@keyframes pulseRed {
+    0%, 100% { 
+        box-shadow: 0 4px 20px rgba(220, 53, 69, 0.3);
+    }
+    50% { 
+        box-shadow: 0 8px 30px rgba(220, 53, 69, 0.6);
+    }
+}
+
+/* Dark mode alert adjustments */
+.highlight-explain-tooltip.dark-contrast .tooltip-header.alert-warning {
+    color: white;
+}
+
+.highlight-explain-tooltip.dark-contrast .tooltip-header .tooltip-close-button {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+/* Mobile responsiveness for seniors using tablets */
+@media (max-width: 768px) {
+    .highlight-explain-tooltip {
+        font-size: 18px;
+        padding: 20px;
+        max-width: 95%;
+        left: 2.5%;
+        right: 2.5%;
+    }
+    
+    #explainHighlightBtn,
+    .explain-button {
+        font-size: 18px;
+        padding: 14px 24px;
+        min-width: 120px;
+    }
+    
+    .tooltip-close-button {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+/* Tutorial System Styles */
+.tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000000;
+    display: none;
+}
+
+.tutorial-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.tutorial-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tutorial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 16px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.tutorial-title {
+    margin: 0;
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.tutorial-close {
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.tutorial-close:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.tutorial-body {
+    padding: 24px;
+}
+
+.tutorial-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #495057;
+    margin: 0 0 20px 0;
+}
+
+.tutorial-demo-area {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.tutorial-demo-text {
+    font-size: 16px;
+    color: #495057;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    cursor: text;
+    user-select: text;
+    margin-bottom: 10px;
+}
+
+.tutorial-demo-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: 2px solid #0056b3;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tutorial-demo-tooltip {
+    background: white;
+    border: 2px solid #333;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.tutorial-demo-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.tutorial-hint {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 10px 0 0 0;
+    font-style: italic;
+}
+
+.tutorial-success {
+    color: #28a745;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.tutorial-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px 24px;
+    border-top: 2px solid #e9ecef;
+}
+
+.tutorial-skip {
+    background: none;
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.tutorial-skip:hover {
+    background: #6c757d;
+    color: white;
+}
+
+.tutorial-progress {
+    flex: 1;
+    text-align: center;
+}
+
+.tutorial-step-counter {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.tutorial-nav {
+    display: flex;
+    gap: 12px;
+}
+
+.tutorial-prev,
+.tutorial-next {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: 2px solid #0056b3;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.tutorial-prev:hover,
+.tutorial-next:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+.tutorial-prev {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    border-color: #5a6268;
+}
+
+.tutorial-prev:hover {
+    background: linear-gradient(135deg, #5a6268, #495057);
+}
+
+/* Dark mode for tutorial */
+.tutorial-overlay.dark-mode .tutorial-content {
+    background: #2c3e50;
+    color: white;
+}
+
+.tutorial-overlay.dark-mode .tutorial-title {
+    color: white;
+}
+
+.tutorial-overlay.dark-mode .tutorial-text {
+    color: #ecf0f1;
+}
+
+.tutorial-overlay.dark-mode .tutorial-demo-area {
+    background: #34495e;
+    border-color: #4a5568;
+}
+
+.tutorial-overlay.dark-mode .tutorial-demo-text {
+    background: #2c3e50;
+    color: white;
+    border-color: #4a5568;
+}
+
+/* Help button - floating help icon */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: white;
+    border: 2px solid #117a8b;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+    z-index: 999997;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-button:hover {
+    background: linear-gradient(135deg, #138496, #117a8b);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(23, 162, 184, 0.4);
 }

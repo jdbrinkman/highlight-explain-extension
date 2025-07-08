@@ -2,31 +2,176 @@
 <html>
   <head>
     <style>
-      body { font-family: sans-serif; padding: 20px; width: 280px; }
-      label { display: block; margin: 10px 0 5px; }
+      body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        padding: 20px; 
+        width: 320px; 
+        background-color: #f9f9f9;
+        line-height: 1.5;
+      }
+      
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 20px;
+        text-align: center;
+      }
+      
+      label { 
+        display: block; 
+        margin: 15px 0 8px; 
+        font-weight: 600;
+        color: #555;
+        font-size: 14px;
+      }
+      
+      select {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 14px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+        margin-bottom: 10px;
+      }
+      
+      select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+      
+      .radio-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 5px;
+      }
+      
+      .radio-option {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      
+      input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+      
+      .radio-option label {
+        margin: 0;
+        font-weight: normal;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      
+      #usage {
+        background-color: #e9ecef;
+        padding: 12px;
+        border-radius: 6px;
+        margin: 15px 0;
+        text-align: center;
+        font-weight: 600;
+        color: #495057;
+        border: 1px solid #dee2e6;
+      }
+      
+      button {
+        width: 100%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 10px;
+        transition: all 0.3s ease;
+      }
+      
+      button:hover {
+        background: linear-gradient(135deg, #218838, #1e9a6a);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+      }
+      
+      .settings-section {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e9ecef;
+      }
+      
+      .help-text {
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 5px;
+        font-style: italic;
+      }
     </style>
   </head>
   <body>
-    <h2>Settings</h2>
-    <label>Language:
+    <h2>Highlight & Explain Settings</h2>
+    
+    <div class="settings-section">
+      <label>Language:</label>
       <select id="language">
         <option value="en">English</option>
         <option value="es">Spanish</option>
       </select>
-    </label>
-    <label>Font Size:
+      <div class="help-text">Choose the language for explanations</div>
+    </div>
+    
+    <div class="settings-section">
+      <label>Text Size:</label>
       <select id="fontSize">
-        <option value="medium">Medium</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium (Recommended)</option>
         <option value="large">Large</option>
-        <option value="x-large">X-Large</option>
+        <option value="x-large">Extra Large</option>
+        <option value="xx-large">Super Large</option>
       </select>
-    </label>
-    <label>Contrast:
-      <input type="radio" name="contrast" value="light" checked> Light
-      <input type="radio" name="contrast" value="dark"> Dark
-    </label>
+      <div class="help-text">Larger text is easier to read</div>
+    </div>
+    
+    <div class="settings-section">
+      <label>Display Mode:</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" id="light" name="contrast" value="light" checked>
+          <label for="light">Light</label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" id="dark" name="contrast" value="dark">
+          <label for="dark">Dark</label>
+        </div>
+      </div>
+      <div class="help-text">Dark mode may be easier on the eyes</div>
+    </div>
+    
+    <div class="settings-section">
+      <label>Safety & Verification:</label>
+      <select id="verificationMode">
+        <option value="basic">Basic Explanations</option>
+        <option value="enhanced">Enhanced Verification</option>
+        <option value="scam-alert">Maximum Scam Protection</option>
+      </select>
+      <div class="help-text">Higher protection checks for scams and misinformation</div>
+    </div>
+    
     <p id="usage">Loading usage...</p>
-    <button>Upgrade</button>
+    
+    <button type="button" id="tutorialBtn" style="background: linear-gradient(135deg, #17a2b8, #138496); margin-bottom: 10px;">
+      📚 Show Tutorial
+    </button>
+    
+    <button type="button" onclick="window.open('mailto:support@example.com?subject=Upgrade Request')">
+      Get More Explanations
+    </button>
+    
     <script src="popup.js"></script>
   </body>
 </html>
