@@ -117,14 +117,31 @@ function showLoadingTooltip(message = "Loading...") {
 
     tooltip = document.createElement('div');
     tooltip.className = 'highlight-explain-tooltip loading';
-    tooltip.innerHTML = `<div class="loading-spinner"></div> ${message}`;
+    
+    // Create the spinner and message with proper structure
+    tooltip.innerHTML = `
+        <div class="loading-spinner"></div>
+        <span>${message}</span>
+    `;
 
     document.body.appendChild(tooltip);
 
-    // Position the tooltip at the center of the viewport for loading message
-    tooltip.style.top = `${window.scrollY + window.innerHeight / 2 - tooltip.offsetHeight / 2}px`;
-    tooltip.style.left = `${window.scrollX + window.innerWidth / 2 - tooltip.offsetWidth / 2}px`;
+    // Position the tooltip properly
+    const selection = window.getSelection();
+    if (selection && selection.toString().trim().length > 0) {
+        const selectionRect = selection.getRangeAt(0).getBoundingClientRect();
+        tooltip.style.top = `${window.scrollY + selectionRect.bottom + TOOLTIP_OFFSET_Y}px`;
+        tooltip.style.left = `${window.scrollX + selectionRect.left}px`;
+    } else {
+        // Fallback positioning if no selection
+        tooltip.style.top = `${window.scrollY + window.innerHeight / 2 - 50}px`;
+        tooltip.style.left = `${window.scrollX + window.innerWidth / 2 - 125}px`;
+    }
+
+    // Force display and opacity
     tooltip.style.display = 'block';
+    tooltip.style.opacity = '1';
+    tooltip.style.transform = 'translateY(0)';
 
     // Apply user settings
     chrome.storage.sync.get(['fontSize', 'contrast'], (data) => {
@@ -139,6 +156,9 @@ function showLoadingTooltip(message = "Loading...") {
             tooltip.classList.remove('dark-contrast');
         }
     });
+
+    // Debug log to confirm function is called
+    console.log('Loading tooltip shown:', message);
 }
 
 function showTooltip(text, alertType = "info", isVerification = false) {
@@ -217,6 +237,9 @@ function showTooltip(text, alertType = "info", isVerification = false) {
             tooltip.classList.remove('dark-contrast');
         }
     });
+
+    // Debug log to confirm function is called
+    console.log('Tooltip shown:', text.substring(0, 50) + '...');
 }
 
 // Listen for messages from background script
