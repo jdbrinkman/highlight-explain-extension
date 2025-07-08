@@ -1,46 +1,143 @@
-/* content.css */
-
-.explanation-tooltip {
+/* Basic tooltip styling */
+.highlight-explain-tooltip {
     position: absolute;
-    z-index: 2147483647; /* Max z-index to appear on top of everything */
-    width: 300px;
-    padding: 15px;
-    padding-top: 30px; /* Extra padding for the close button */
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    font-family: sans-serif;
-    line-height: 1.5;
+    background-color: #fff;
     border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999999; /* Ensure it's on top */
+    min-width: 200px;
+    /* NEW: Responsive width properties */
+    width: 90%; /* Take up 90% of the available width */
+    max-width: 400px; /* But don't exceed 400px, or the original 300px if you prefer */
+    left: 5%; /* Center it roughly by giving left/right margin */
+    right: 5%; /* For a more controlled horizontal position */
+    /* Adjust positioning from absolute left/top which might override this */
+    /* Removed specific left and top for better responsiveness, will rely more on JS */
+
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.5;
+    text-align: left;
+    /* Hidden by default, now with transitions */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-.explanation-tooltip-close-btn {
+/* Make tooltip visible when display is block and apply initial transform */
+.highlight-explain-tooltip[style*="display: block"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Tooltip close button styling */
+.tooltip-close-button {
     position: absolute;
     top: 5px;
-    right: 8px;
+    right: 5px;
+    background: none;
     border: none;
-    background: transparent;
+    font-size: 1.2em;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 0;
+    color: #888;
     line-height: 1;
+    padding: 0;
 }
 
-/* Light Theme */
-.explanation-tooltip.theme-light {
-    background-color: #ffffff;
-    color: #222222;
-}
-.explanation-tooltip.theme-light .explanation-tooltip-close-btn {
-    color: #555555;
+.tooltip-close-button:hover {
+    color: #333;
 }
 
-/* Dark Theme */
-.explanation-tooltip.theme-dark {
-    background-color: #2a2a2e;
-    color: #f1f1f1;
-    border-color: #555;
+/* Light Contrast Theme */
+.highlight-explain-tooltip.light-contrast {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
 }
-.explanation-tooltip.theme-dark .explanation-tooltip-close-btn {
-    color: #f1f1f1;
+
+/* Dark Contrast Theme */
+.highlight-explain-tooltip.dark-contrast {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #eee;
+}
+
+/* Styling for the Explain button */
+#explainHighlightBtn {
+    position: absolute;
+    z-index: 999998; /* Just below the tooltip */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Transitions for button */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+/* Make button visible when display is block and apply initial transform */
+#explainHighlightBtn[style*="display: block"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+#explainHighlightBtn:hover {
+    background-color: #0056b3;
+}
+
+/* New class for explain button styles, mirroring the #explainHighlightBtn */
+.explain-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Transitions for button class */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+.explain-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the disabled explain button */
+.explain-button.disabled {
+    background-color: #cccccc; /* Grey out the background */
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    opacity: 0.7; /* Make it slightly transparent */
+    box-shadow: none; /* Remove shadow to make it look less interactive */
+}
+
+.explain-button.disabled:hover {
+    background-color: #cccccc; /* Keep the grey background on hover */
+}
+
+/* Basic loading spinner for the tooltip */
+.loading-spinner {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
