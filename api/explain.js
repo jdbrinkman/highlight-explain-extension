@@ -5,15 +5,21 @@ const openai = new OpenAI({
 });
 
 export default async function handler(req, res) {
+  // Directly use the text from the request body as the prompt.
+  // This 'text' contains the detailed instructions from background.js.
   const { text, language } = req.body;
 
-  const prompt = `Please explain the following text at a 9th-grade reading level in ${language === "es" ? "Spanish" : "English"}:\n\n${text}`;
+  // Validate that text was provided
+  if (!text) {
+    return res.status(400).json({ error: "No text provided for processing." });
+  }
 
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
-      max_tokens: 300,
+      // The 'text' variable now holds the full prompt from your background script.
+      messages: [{ role: "user", content: text }],
+      max_tokens: 300, // You can adjust this as needed
     });
 
     res.status(200).json({
